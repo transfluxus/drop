@@ -8,7 +8,7 @@ name = Drop
 authors = [Ramin Soleymani (original sDrop by Andreas Schlegel)](http://diskordier.net)
 
 # A web page for your Library, NOT a direct link to where to download it.
-url = https://github.com/transfluxus/drop
+url = http://transfluxus.github.io/drop/
 
 # The category (or categories) of your Library, must be from the following list:
 #   "3D"            "Animation"     "Compilations"      "Data"          
