@@ -1,0 +1,7 @@
+.classpath
+.project
+org.eclipse.jdt.core.prefs
+distribution
+core.jar
+resources
+web
