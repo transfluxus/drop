@@ -1,13 +1,18 @@
 package drop;
 
+import java.awt.Canvas;
 import java.awt.Component;
 import java.awt.dnd.DropTarget;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
+import processing.awt.PSurfaceAWT;
 import processing.awt.PSurfaceAWT.SmoothCanvas;
 import processing.core.PApplet;
+import processing.core.PSurface;
+import processing.javafx.PSurfaceFX;
+import processing.opengl.PSurfaceJOGL;
 
 /**
  * 
@@ -51,6 +56,8 @@ public class SDrop {
 
 	protected Component component;
 
+	protected PSurface surface;
+	
 	protected Object parent;
 
 	private String _myMethodName;
@@ -66,7 +73,7 @@ public class SDrop {
 
 	protected ArrayList<Object> _myDropListener;
 
-	private final DropHandler myDropHandler;
+	private  DropHandler myDropHandler;
 
 	
 	/**
@@ -74,12 +81,31 @@ public class SDrop {
 	 */
 	public final static String VERSION = "0.2.0";
 
+	enum SurfaceType {
+		AWT,JOGL,FX
+	}
+	
+	protected SurfaceType surfaceType;
+	
 	/**
 	 * New Constructor
 	 * @param applet
 	 */
 	public SDrop(PApplet applet) {
-		this((SmoothCanvas)applet.getSurface().getNative(),applet);
+		surface =  applet.getSurface();
+		if(surface instanceof PSurfaceAWT) {
+			surfaceType = SurfaceType.AWT;
+			setup((SmoothCanvas) surface.getNative(),applet);
+		} else if(surface instanceof PSurfaceJOGL) {
+			surfaceType = SurfaceType.JOGL;
+			setup(((PSurfaceJOGL) surface).getComponent(),applet);
+		} else if(surface instanceof PSurfaceFX) {
+			surfaceType = SurfaceType.FX;
+			setup((Canvas) surface.getNative(),applet);
+		} else {
+			System.err.println("Unknown surfacetype");
+		}
+		
 	}
 	
 
@@ -88,7 +114,7 @@ public class SDrop {
 	 * @param theComponent
 	 * @param theObject
 	 */
-	private SDrop(Component theComponent, Object theObject) {
+	private void setup(Component theComponent, Object theObject) {
 		_myDropListener = new ArrayList<>();
 		component = theComponent;
 		parent = theObject;
