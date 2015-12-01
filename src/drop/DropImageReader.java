@@ -1,6 +1,5 @@
 package drop;
 
-
 /**
  * 
  * drop is a processing and java library for dragging and dropping
@@ -72,8 +71,8 @@ public class DropImageReader implements Runnable {
 		start();
 	}
 
-	protected DropImageReader(final DropEvent theDropEvent, final PImage theDropImageLoader,
-			final String[] thePath) {
+	protected DropImageReader(final DropEvent theDropEvent,
+			final PImage theDropImageLoader, final String[] thePath) {
 		_myDropEvent = theDropEvent;
 		_myImage = theDropImageLoader;
 		_myPath = thePath;
@@ -105,16 +104,16 @@ public class DropImageReader implements Runnable {
 			_myImage.pixels = theImage.pixels;
 			_myImage.updatePixels();
 		} else {
-			System.out.println("### ERROR drop. unable to load image from " + Arrays.toString(_myPath));
+			System.out.println("### ERROR drop. unable to load image from "
+					+ Arrays.toString(_myPath));
 		}
 	}
 
 	public void run() {
-		if (_myDropEvent.drop.component instanceof SmoothCanvas) {
-			for (int i = 0; i < _myPath.length; i++) {
-				PImage myImage = ((PApplet) _myDropEvent.drop.parent).loadImage(_myPath[i]);
-				updatePImage(myImage);
-			}
+		for (int i = 0; i < _myPath.length; i++) {
+			PImage myImage = ((PApplet) _myDropEvent.drop.parent)
+					.loadImage(_myPath[i]);
+			updatePImage(myImage);
 		}
 		stop();
 		return;
@@ -172,10 +171,12 @@ public class DropImageReader implements Runnable {
 	 *            float
 	 * @return BufferedImage
 	 */
-	public static BufferedImage scaleImage(BufferedImage theImage, float theWidth, float theHeight) {
+	public static BufferedImage scaleImage(BufferedImage theImage,
+			float theWidth, float theHeight) {
 		AffineTransform tx = new AffineTransform();
 		tx.scale(theWidth, theHeight);
-		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+		AffineTransformOp op = new AffineTransformOp(tx,
+				AffineTransformOp.TYPE_BILINEAR);
 		BufferedImage t = op.filter(theImage, null);
 		return t;
 	}
@@ -204,7 +205,8 @@ public class DropImageReader implements Runnable {
 		// Create a buffered image with a format that's compatible with the
 		// screen
 		BufferedImage bimage = null;
-		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsEnvironment ge = GraphicsEnvironment
+				.getLocalGraphicsEnvironment();
 		try {
 			// Determine the type of transparency of the new buffered image
 			int transparency = Transparency.OPAQUE;
@@ -215,8 +217,8 @@ public class DropImageReader implements Runnable {
 			// Create the buffered image
 			GraphicsDevice gs = ge.getDefaultScreenDevice();
 			GraphicsConfiguration gc = gs.getDefaultConfiguration();
-			bimage = gc.createCompatibleImage(image.getWidth(null), image.getHeight(null),
-					transparency);
+			bimage = gc.createCompatibleImage(image.getWidth(null),
+					image.getHeight(null), transparency);
 		} catch (HeadlessException e) {
 			// The system does not have a screen
 		}
@@ -227,7 +229,8 @@ public class DropImageReader implements Runnable {
 			if (hasAlpha) {
 				type = BufferedImage.TYPE_INT_ARGB;
 			}
-			bimage = new BufferedImage(image.getWidth(null), image.getHeight(null), type);
+			bimage = new BufferedImage(image.getWidth(null),
+					image.getHeight(null), type);
 		}
 
 		// Copy image to buffered image
