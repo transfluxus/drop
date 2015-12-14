@@ -5,7 +5,7 @@
 name = Drop
 
 # List of authors. Links can be provided using the syntax [author name](url).
-authors = [Ramin Soleymani (original sDrop by Andreas Schlegel)](http://diskordier.net)
+authors = [Ramin Soleymani](http://diskordier.net), original sDrop by [Andreas Schlegel](http://www.sojamo.com)
 
 # A web page for your Library, NOT a direct link to where to download it.
 url = http://transfluxus.github.io/drop/
@@ -25,13 +25,13 @@ categories = I/O
 # repeating the name of your Library here. Also, avoid saying anything redundant 
 # like mentioning that it's a Library. This should start with a capitalized 
 # letter, and end with a period.
-sentence = drop is a processing library that lets you drag and drop objects such as files, images, bookmarks, or text into your processing sketch. 
+sentence = Drop is a processing library that lets you drag and drop objects such as files, images, bookmarks, or text into your processing sketch. 
 
 # Additional information suitable for the Processing website. The value of
 # 'sentence' always will be prepended, so you should start by writing the
 # second sentence here. If your Library only works on certain operating systems,
 # mention it here.
-paragraph = once dropped you can access the information of the object from a DropEvent that has been forwarded to the processing sketch. 
+paragraph = Once dropped you can access the information of the object from a DropEvent that has been forwarded to the processing sketch. 
 
 # Links in the 'sentence' and 'paragraph' attributes can be inserted using the
 # same syntax as for authors. 
@@ -45,7 +45,7 @@ version = 1  # This must be parsable as an int
 
 # The version as the user will see it. If blank, the version attribute will be 
 # used here. This should be a single word, with no spaces.
-prettyVersion = 1.0.1  # This is treated as a String
+prettyVersion = 1.0.2  # This is treated as a String
 
 # The min and max revision of Processing compatible with your Library.
 # Note that these fields use the revision and not the version of Processing, 
